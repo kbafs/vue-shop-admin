@@ -54,8 +54,8 @@ export default {
             url: "http://localhost:8888/api/private/v1/login",
             method: "post",
             data: this.form
-          }).then(res => {
-            if (res.data.meta.status == 200) {
+          }).then(({ data: { data, meta } }) => {
+            if (meta.status == 200) {
               localStorage.setItem("token", data.token);
               this.$router.push("/home");
             }

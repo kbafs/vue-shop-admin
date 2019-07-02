@@ -11,7 +11,7 @@
         <el-col :span="6" class="header-right">
           <div>
             欢迎39期星耀会员
-            <a href="#">退出</a>
+            <a href="#" @click.prevent="logout">退出</a>
           </div>
         </el-col>
       </el-row>
@@ -113,13 +113,6 @@
         </el-menu>
       </el-aside>
       <el-main>
-        <el-table :data="tableData">
-          <el-table-column prop="date" label="姓名" width="140"></el-table-column>
-          <el-table-column prop="name" label="邮箱" width="120"></el-table-column>
-          <el-table-column prop="address" label="电话"></el-table-column>
-          <el-table-column prop="address" label="用户状态"></el-table-column>
-          <el-table-column prop="address" label="操作"></el-table-column>
-        </el-table>
         <router-view></router-view>
       </el-main>
     </el-container>
@@ -127,7 +120,16 @@
 </template>
 
 <script>
-export default {};
+export default {
+  methods: {
+    logout() {
+      // 1. 清空token
+      localStorage.removeItem("token");
+      // 2. 跳转到登录页
+      this.$router.push("/login");
+    }
+  }
+};
 </script>
 
 <style>
